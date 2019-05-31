@@ -1,0 +1,342 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Ansible Beginner to Brilliant</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>TXLF Ansible Workshop</h2>
+					<hr/>
+					<h3>Beginner to Brilliant</h3>
+					<small>Alex Juarez / @mralexjuarez</small>
+				</section>
+
+				<section>
+				<h2>Part 1 - The Setup</h2>
+					<ul>
+						<li>The What and Why of Ansible</li>
+						<li>Vocabulary</li>
+						<li>Enviornment Setup</li>
+						<li>Story Time!</li>
+					</ul>
+				</section>
+
+				<section>
+				<h2>Part 2 - The Action!</h2>
+					<ul>
+						<li>Playbook One - Modules</li>
+						<li>Playbook Two - Varibale</li>
+						<li>Playbook Three - Templates and Files</li>
+						<li>Playbook Four -  Control Statement &amp; Errors</li>
+					</ul>
+				</section>
+
+				<section>
+				<h2>Part 3 - The Wrap</h2>
+					<ul>
+						<li>Review</li>
+						<li>Resources</li>
+						<li>Closing</li>
+					</ul>
+				</section>
+
+				<section>
+				<h2>Part 1 - The Setup</h2>
+				</section>
+
+				<section>
+				<h2>The What and Why of Ansible</h2>
+				<p>Ansible is an agentless configuration managment tool to automate the configuration of servers.</p>
+				<p>It makes it easier to have consistency in an enviornment.</p>
+				</section>
+
+				<section>
+				<h2>Alternatives</h2>
+					<p>The idea of configuration management has been around for a while and there are plenty of alternatives.</p>
+					<ul>
+						<li>CFEngine</li>
+						<li>Chef</li>
+						<li>Puppet</li>
+						<li>Salt</li>
+					</ul>
+				</section>
+
+				<section>
+				<h2>Idempotence</h2>
+				<p>Idempotence means that running a command or function several times produces the same result as running it only once.</p>
+				<small><a href="https://peterlyons.com/problog/2010/05/on-idempotence-intention-and-unix-commands/" target="_blank">https://peterlyons.com/problog/2010/05/on-idempotence-intention-and-unix-commands/</a></small>
+				</section>
+
+				<section>
+				<h2>Vocabulary</h2>
+				<table>
+					<tr>
+						<td>Playbooks</td><td>A collection of plays</td>
+					</tr>
+					<tr>
+						<td>Plays</td><td>A mapping of a task that runs on a host</td>
+					</tr>
+					<tr>
+						<td>Task</td><td>The reason playbooks exist. Combined action with name and other arguments</td>
+					</tr>
+					<tr>
+						<td>Action</td><td>A module + arguments</td>
+					</tr>
+					<tr>
+						<td>Module</td><td>The work being kicked off to the target machine</td>
+					</tr>
+				</table>
+				<a href="https://docs.ansible.com/ansible/latest/reference_appendices/glossary.html" target="_blank">Docs &raquo; Glossary</a>
+				</section>
+
+				<section>
+				<h2>Enviornment</h2>
+				<p>Our demo enviornment will use <a href="https://vagrantup.com" target="_blank">Vagrant</a>.</p>
+				<table style="float: left">
+					<tr><th>WEB</th></tr>
+					<tr><td>OS</td><td>CentOS 7</td></tr>
+					<tr><td>IP</td><td>192.168.33.10</td></tr>
+				</table>
+
+				<table>
+					<tr><th>DB</th></tr>
+					<tr><td>OS</td><td>Ubuntu 16.04</td></tr>
+					<tr><td>IP</td><td>192.168.33.20</td></tr>
+				</table>
+				</section>
+
+				<section>
+				<h2>Want to follow along...</h2>
+				<ul>
+					<li><a href="https://gist.github.com/mralexjuarez/6435e71b64c6b099b2d96f2e28a325fe" target="_blank">Vagrant How-to</a></li>
+					<li><a href="https://github.com/mralexjuarez/ansible-b2b" target="_blank">Ansible Examples</a></li>
+				</section>
+
+				<section>
+				<h2>The Quick Run Down</h2>
+				<p>TODO: Add quick setup instructions</p>
+				<ol>
+					<li>Install <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">Virtualbox</a></li>
+					<li>Install <a href="https://www.vagrantup.com/downloads.html" target="_blank">Vagrant</a></li>
+					<li>Clone or Download the <a href="https://github.com/mralexjuarez/ansible-b2b" target="_blank">Ansible Examples Repo</a></li>
+				</ol>
+				</section>
+
+				<section>
+				<h2>Story Time!</h2>
+				<p>It's 2017 and I've been asked if I could help with writing assessments for our new on boarding project.</p>
+				</section>
+
+				<section>
+				<h2>The Challeange</h2>
+				<p>The ask was to write assessments, not to learn Ansible.</p>
+				<ul>
+					<li>Configure machines for break-fixes</li>
+					<li>Be able to repeate the configuration</li>
+					<li>Self serve deployments</li>
+					<li>Be able to grade the asessments</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>So yeah....</h2>
+				<img src="imgs/tweet.png" alt="" class="plain" />
+				</section>
+
+				<section>
+				<h2>Part 2 - The Action!</h2>
+				</section>
+
+				<section>
+				<h2>Playbook One - Modules</h2>
+				<p style="text-align:left"><u>Objectives</u></p>
+				<ul>
+					<li>Be able to Execute single modules</li>
+					<li>Become familar with a YAML file</li>
+					<li>Understand the Playbook / Role Directory Structure</li>
+					<li>Be able to write playbooks to
+						<ul>
+							<li>Install a Package</li>
+							<li>Configure a Service</li>
+						</ul>
+					</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Executing Modules</h2>
+				<p>Let's demo executing a single module.</p>
+				<pre><code class="shell">$ ansible -i hosts_file -m setup localhost</code></pre>
+				</section>
+
+				<section>
+				<h2>YAML File</h2>
+				<p>Ansible uses YAML because it is easier to read than XML or JSON.</p>
+				<pre><code class="yaml">---
+# This is a comment
+# A list of Colors
+- Smaragdine
+- Glaucous
+- Amaranth
+
+# A dictonary is a key-value pair
+car:
+ make: Nissian
+ model: Juke
+ color: Falu</code></pre>
+				<small><a href="https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html" target="_blank">Docs &raquo; YAML Syntax</a></small>
+				</section>
+
+			<section>
+				<h2>Directory Structure</h2>
+				<pre><code class="shell">roles/
+common/
+    tasks/
+        main.yml
+    handlers/
+        main.yml
+    templates/
+        ntp.conf.j2
+    files/
+        bar.txt
+        foo.sh</code></pre>
+				<ul>
+					<li><a href="https://gist.github.com/mralexjuarez/c4cfae2f6f4f23af1d1b" target="_blank">Directory Strcuture One-Liner</a></li>
+					<li>ansible-galaxy init your_role_name</li>
+				</ul>
+				<small><a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#directory-layout" target="_blank">Docs &raquo; Best Practices &raquo; Directory Layout</a></small>
+			</section>
+
+			<section>
+			<h2>Okay, okay, the Playbook</h2>
+			<p>Let's go back to the repo <a href="https://github.com/mralexjuarez/ansible-b2b" target="_blank">https://github.com/mralexjuarez/ansible-b2b</a></p>
+			</section>
+
+			<section>
+			<h2>Check Point Slide</h2>
+			<p>Let's review what we've covred so far.</p>
+			<ul>
+				<li></li>
+			</ul>
+			</section>
+
+				<section>
+				<h2>Playbook Two - Variables</h2>
+				<p style="text-align:left"><u>Objectives</u></p>
+				<ul>
+					<li>Understand Variable Precedence</li>
+					<li>Use the debug module</li>
+					<li>Use Variables in Playbooks</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Variable Precedence</h2>
+				<p>Variable precedence is a thing. It's best to pick a place for variables and give them all a unique name, two variables can have the same name.</p>
+				<p>As an example there are <em>22</em> levels of variable precedence outlined by Ansbile</p>
+				<small><a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable" target="_blank">Docs &raquo; Using Variables &raquo; Precedence</a></small>
+				</section>
+
+				<section>
+				<h2>Ansible Facts</h2>
+				<p>Earlier we used the setup module to dump a bunch of values. These values are called Ansible facts. We can do the same with the debug module</p>
+				<pre><code class="yaml">---
+- name: Displaying Debug Information
+  debug: var=ansible_facts</code></pre>
+				<small><a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variables-discovered-from-systems-facts" target="_blank">Docs &raquo; Using Variables &raquo; Facts</a></small>
+				</section>
+
+				<section>
+				<h2>Varibles in Playbooks</h2>
+				<p>A variable in a playbook is encased in {{ Variable }}</p>
+				<p>A variable should be in quotes if it's part of a larger string of text</p>
+				<pre><code class="yaml">vars:
+  app_path: "{{ base_path }}/22"</code></pre>
+				<small><a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html" target="_blank">Docs &raquo Varibles</a></small>
+				</section>
+
+				<section>
+				<h2>Accessing Complex Variable Data</h2>
+				<p>If data is structured in a complex way we can access the data in a few ways</p>
+				<p>Here are two examples of how to access data
+					<ul>
+						<li>{{ ansible_facts.default_ipv4.address }}"</li>
+						<li>{{ ansible_facts["eth0"]["ipv4"]["address"] }}</li>
+					</ul>
+				</section>
+
+				<section>
+				<h2>Running the Example Playbook</h2>
+				<p>Let's go back to the repo <a href="https://github.com/mralexjuarez/ansible-b2b" target="_blank">https://github.com/mralexjuarez/ansible-b2b</a></p>
+				</section>
+
+				<section>
+				<h2>Check Point Slide</h2>
+				</section>
+
+				<section>
+				<h2>Playbook Three - Templates and Files</h2>
+				<p style="text-align:left"><u>Objectives</u></p>
+				<ul>
+					<li>Be able to to copy files to the remote server</li>
+					<li>Be able to copy tepmlate files to the server</li>
+					<li>Be able to add lines to files</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Playbook Four -  Control Statements &amp; Errors</h2>
+				</section>
+
+				<section>
+				<h2>Review</h2>
+				</section>
+
+				<section>
+				<h2>Resources</h2>
+				</section>
+
+				<section>
+				<h2>Closing Q&amp;A</h2>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
