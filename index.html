@@ -33,6 +33,11 @@
 				</section>
 
 				<section>
+				<h2>Good Freaking Morning!</h2>
+				<img src="imgs/good_morning_sunshine.jpg" alt="" class="plain"/>
+				</section>
+
+				<section>
 				<h2>Part 1 - The Setup</h2>
 					<ul>
 						<li>The What and Why of Ansible</li>
@@ -107,7 +112,7 @@
 						<td>Module</td><td>The work being kicked off to the target machine</td>
 					</tr>
 				</table>
-				<a href="https://docs.ansible.com/ansible/latest/reference_appendices/glossary.html" target="_blank">Docs &raquo; Glossary</a>
+				<small><a href="https://docs.ansible.com/ansible/latest/reference_appendices/glossary.html" target="_blank">Docs &raquo; Glossary</a></small>
 				</section>
 
 				<section>
@@ -172,7 +177,7 @@
 				<h2>Playbook One - Modules</h2>
 				<p style="text-align:left"><u>Objectives</u></p>
 				<ul>
-					<li>Be able to Execute single modules</li>
+					<li>Be able to execute single modules</li>
 					<li>Become familar with a YAML file</li>
 					<li>Understand the Playbook / Role Directory Structure</li>
 					<li>Be able to write playbooks to
@@ -205,7 +210,10 @@ car:
  make: Nissian
  model: Juke
  color: Falu</code></pre>
-				<small><a href="https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html" target="_blank">Docs &raquo; YAML Syntax</a></small>
+				<small>
+					<a href="https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html" target="_blank">Docs &raquo; YAML Syntax</a> |
+					<a href="http://yamllint.com" target="_blank">YAML Lint</a>
+				</small>
 				</section>
 
 			<section>
@@ -237,7 +245,15 @@ common/
 			<h2>Check Point Slide</h2>
 			<p>Let's review what we've covred so far.</p>
 			<ul>
-				<li></li>
+				<li>Be able to execute single modules</li>
+				<li>Become familar with a YAML file</li>
+				<li>Understand the Playbook / Role Directory Structure</li>
+				<li>Be able to write playbooks to
+					<ul>
+						<li>Install a Package</li>
+						<li>Configure a Service</li>
+					</ul>
+				</li>
 			</ul>
 			</section>
 
@@ -246,7 +262,7 @@ common/
 				<p style="text-align:left"><u>Objectives</u></p>
 				<ul>
 					<li>Understand Variable Precedence</li>
-					<li>Use the debug module</li>
+					<li>Use the Debug Module</li>
 					<li>Use Variables in Playbooks</li>
 				</ul>
 				</section>
@@ -282,7 +298,7 @@ common/
 				<p>Here are two examples of how to access data
 					<ul>
 						<li>{{ ansible_facts.default_ipv4.address }}"</li>
-						<li>{{ ansible_facts["eth0"]["ipv4"]["address"] }}</li>
+						<li>{{ ansible_facts['eth0']['ipv4']['address'] }}</li>
 					</ul>
 				</section>
 
@@ -293,24 +309,100 @@ common/
 
 				<section>
 				<h2>Check Point Slide</h2>
+				<ul>
+					<li>Understand Variable Precedence</li>
+					<li>Use the Debug Module</li>
+					<li>Use Variables in Playbooks</li>
+				</ul>
 				</section>
 
 				<section>
 				<h2>Playbook Three - Templates and Files</h2>
 				<p style="text-align:left"><u>Objectives</u></p>
 				<ul>
-					<li>Be able to to copy files to the remote server</li>
-					<li>Be able to copy tepmlate files to the server</li>
+					<li>Be able to to copy files to a remote server</li>
+					<li>Be able to copy tepmlate files to a remote server</li>
 					<li>Be able to add lines to files</li>
 				</ul>
 				</section>
 
 				<section>
-				<h2>Playbook Four -  Control Statements &amp; Errors</h2>
+				<h2>Copying a File</h2>
+				<p>Sometimes we just need to copy a file in place. An example of this would be the MOTD file.</p>
+				<small><a href="https://docs.ansible.com/ansible/latest/modules/copy_module.html" target="_blank">Docs &raquo; Copy</a></small>
+				</section>
+
+				<section>
+				<h2>Filling in a Template</h2>
+				<p>Understading variables from the previous section allows us to begin to use templates.</p>
+				<p>Templates in Ansible are <a href="http://jinja.pocoo.org/docs/2.10/" target="_blank">Jinja2</a> templates.</p>
+				<small><a href="https://docs.ansible.com/ansible/latest/modules/template_module.html" target="_blank">Docs &raquo; Template</a></small>
+				</section>
+
+				<section>
+				<h2>Manage lines of Text</h2>
+				<p>What if we just want to add a line to a file, or better yet, add it only if it is not there</p>
+				<p>An example for this would be add lines to the /etc/hosts file</p>
+				<small><a href="https://docs.ansible.com/ansible/latest/modules/lineinfile_module.html" target="_blank">Docs &raquo; lineinfile</a></small>
+				</section>
+
+				<section>
+				<h2>Check Point Slide</h2>
+				<ul>
+					<li>Be able to to copy files to a remote server</li>
+					<li>Be able to copy tepmlate files to a remote server</li>
+					<li>Be able to add lines to files</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Playbook Four - Conditionals &amp; Errors</h2>
+				<p style="text-align:left"><u>Objectives</u></p>
+				<ul>
+					<li>Undersrtand how to register variables and use them in your playbook</li>
+					<li>Undersatnd how to use the when clause to be more dynamic in your playbooks</li>
+					<li>How to handle errors when they aren't errors</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Registering Variables</h2>
+				<small><a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html#register-variables" target="_blank">Docs &raquo; Conditionals &raquo; Regsiter Variables</a></small>
+				</section>
+
+				<section>
+				<h2>Using the When Conditional</h2>
+				<small><a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html#the-when-statement" target="_blank">Docs &raquo; Conditionals &raquo; When</a></small>
+				</section>
+
+				<section>
+				<h2>Error Handling</h2>
+				<small><a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_error_handling.html" target="_blank">Docs &raquo; Error Handling</a></small>
+				</section>
+
+				<section>
+				<h2>Running the Example Playbook</h2>
+				<p>Let's go back to the repo <a href="https://github.com/mralexjuarez/ansible-b2b" target="_blank">https://github.com/mralexjuarez/ansible-b2b</a></p>
+				</section>
+
+				<section>
+				<h2>Check Point Slide</h2>
+				<ul>
+					<li>Undersrtand how to register variables and use them.</li>
+					<li>Undersatnd how to use the when clause to be more dynamic in your playbooks</li>
+					<li>How to handle errors when they aren't errors</li>
+				</ul>
 				</section>
 
 				<section>
 				<h2>Review</h2>
+				<p>Whew! We did a lot</p>
+				<ul>
+					<li>We are just scracthing the surface</li>
+					<li>Playbooks are really the key here</li>
+					<li>You can use the debug module to test things</li>
+					<li>When all else fails you can use the shell module</li>
+				</ul>
 				</section>
 
 				<section>
@@ -318,8 +410,24 @@ common/
 				</section>
 
 				<section>
-				<h2>Closing Q&amp;A</h2>
-				</section>
+	           <h2>Contact Information</h2>
+	           <div id="hcard-Alex-Juarez" class="vcard">
+	            <a class="url fn" href="http://unsupported.io">Alex Juarez</a>
+	            <div class="org">Linux Principal Engineer at Rackspace</div>
+	            <a class="email" href="mailto:alex.juarez@rackspace.com">alex.juarez@rackspace.com</a>
+	           <div><span class="category">twitter: <a href="http://www.twitter.com/mralexjuarez" target="_blank">@mralexjuarez</a></span></div><p style="font-size:smaller;">This <a href="http://microformats.org/wiki/hcard" target="_blank">hCard</a> created with the <a href="http://microformats.org/code/hcard/creator" target="_blank">hCard creator</a>.</p>
+	           </div>
+	         </section>
+					<section>
+							<h2>Q &amp; A</h2>
+							<p>Or we can talk about whiskey</p>
+							<img src="http://0f7e4b6f48f01603dbf0-798ceaca68548b7d94e5a0f7efc280b5.r85.cf5.rackcdn.com/whiskey.jpg" class="plain"/>
+					</section>
+					<section>
+							<h2>Cat Tax!</h2>
+							<img src="imgs/ziggy.png" class="plain" style="float: left; max-width:45%"/>
+							<img src="imgs/moscow.png" class="plain" style="float: right; max-width:45%"/>
+					</section>
 			</div>
 		</div>
 
